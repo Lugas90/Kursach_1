@@ -1,8 +1,8 @@
 import java.sql.Array;
 
 public class Main {
+     static Employee [] emp1 = new Employee[10];
     public static void main(String[] args) {
-        Employee [] emp1 = new Employee[10];
         emp1 [0] = new Employee("Разборов Петр Михайлович", 1, 70_000);
         emp1 [1] = new Employee("Карасев Виктор Иванович", 1, 68_500);
         emp1 [2] = new Employee("Проскурина Яна Викторовна", 2, 81_300);
@@ -16,84 +16,78 @@ public class Main {
 
         System.out.println(emp1[5]);
         System.out.println();
-        printAllEmployee(emp1);
+        printAllEmployee();
         System.out.println();
-        allMonthlyExpenses(emp1);
+        allMonthlyExpenses();
         System.out.println();
-        minSalary(emp1);
+        minSalary();
         System.out.println();
-        maxSalary(emp1);
+        maxSalary();
         System.out.println();
-        avgSalary(emp1);
+        avgSalary();
         System.out.println();
-        allFio(emp1);
+        allFio();
         System.out.println();
-        indexSalary(emp1);
+        indexSalary(20);
         System.out.println();
-        printAllEmployee(emp1);
+        printAllEmployee();
         }
 
-    public static void printAllEmployee (Employee [] emp) {
-        for (int i = 0; i < emp.length; i++) {
-            System.out.println(emp[i]);
+    private static void printAllEmployee () {
+        for (int i = 0; i < emp1.length; i++) {
+            System.out.println(emp1[i]);
         }
     }
-        public static double allMonthlyExpenses (Employee [] emp) {
+    private static double allMonthlyExpenses () {
             double sum = 0;
-            for (int i = 0; i < emp.length; i++){
-                sum = sum + emp[i].getSalary();
+            for (int i = 0; i < emp1.length; i++){
+                sum = sum + emp1[i].getSalary();
             }
             System.out.println("Сумма затрат за месяц составляет: " + sum);
             return sum;
         }
 
-        public static double minSalary (Employee [] emp){
-        double minSum = 0;
-            for (int i = 0; i < emp.length; i++) {
-                if (emp[i].getSalary() > 0) {
-                    minSum = emp[i].getSalary();
-                    break;
-                }
-            }
-            for (int i = 0; i < emp.length; i++) {
-                if (minSum > emp[i].getSalary()){
-                    minSum = emp[i].getSalary();
+    private static double minSalary (){
+        double minSum = 1_000_000;
+            for (int i = 0; i < emp1.length; i++) {
+                if (minSum > emp1[i].getSalary()){
+                    minSum = emp1[i].getSalary();
                 }
             }
             System.out.println("Сотрудник с минимальной зарплатой: " +  minSum);
             return minSum;
         }
 
-        public static double maxSalary (Employee [] emp){
+    private static double maxSalary (){
         double maxSum = 0;
-            for (int i = 0; i < emp.length; i++) {
-                if (maxSum < emp[i].getSalary()){
-                    maxSum = emp[i].getSalary();
+            for (int i = 0; i < emp1.length; i++) {
+                if (maxSum < emp1[i].getSalary()){
+                    maxSum = emp1[i].getSalary();
                 }
             }
             System.out.println("Сотрудник с максимальной зарплатой: " +  maxSum);
             return maxSum;
         }
-        public static double avgSalary (Employee [] emp) {
+    private static double avgSalary () {
             double avgSum = 0;
-            for (int i = 0; i < emp.length; i++) {
-                avgSum = avgSum + emp[i].getSalary() / emp.length;
+            for (int i = 0; i < emp1.length; i++) {
+                avgSum = avgSum + emp1[i].getSalary() / emp1.length;
             }
             System.out.println("Среднее значение зарплаты составляет: " + avgSum);
             return avgSum;
         }
-        public static void allFio (Employee [] emp){
-            for (int i = 0; i < emp.length; i++) {
-                System.out.println("ФИО сотрудника: " + emp[i].getFio());
+    private static void allFio (){
+            for (int i = 0; i < emp1.length; i++) {
+                System.out.println("ФИО сотрудника: " + emp1[i].getFio());
             }
         }
-        
-        public static double indexSalary (Employee [] emp){
+
+    private static double indexSalary (int index){
         double indexSum = 0;
-            for (int i = 0; i < emp.length; i++) {
-              indexSum = emp[i].getSalary() * 0.10;
-              emp[i].setSalary(emp[i].getSalary() + indexSum);
-                System.out.println("Зарплата сотрудника проиндексирована на 10%. Прибавка составляет: " + indexSum);
+            for (int i = 0; i < emp1.length; i++) {
+              indexSum = emp1[i].getSalary() / 100 * index;
+              emp1[i].setSalary(emp1[i].getSalary() + indexSum);
+                System.out.println("Зарплата сотрудника " + emp1[i].getFio() +  " проиндексирована на " + index + "%. Прибавка составляет: " + indexSum);
             }
             return indexSum;
         }

@@ -4,7 +4,7 @@ public class Employee {
     private String fio;
     private int department;
     private double salary;
-    static private int counter = 1;
+    private static int counter = 1;
     private int id;
     public Employee (String fio, int department, double salary){
         id = counter++;
