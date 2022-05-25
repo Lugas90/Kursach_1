@@ -1,7 +1,7 @@
 import java.sql.Array;
 
 public class Main {
-     static Employee [] emp1 = new Employee[10];
+    private static Employee [] emp1 = new Employee[10];
     public static void main(String[] args) {
         emp1 [0] = new Employee("Разборов Петр Михайлович", 1, 70_000);
         emp1 [1] = new Employee("Карасев Виктор Иванович", 1, 68_500);
@@ -49,23 +49,27 @@ public class Main {
 
     private static double minSalary (){
         double minSum = 1_000_000;
+        String name = null;
             for (int i = 0; i < emp1.length; i++) {
                 if (minSum > emp1[i].getSalary()){
                     minSum = emp1[i].getSalary();
+                    name = emp1[i].getFio();
                 }
             }
-            System.out.println("Сотрудник с минимальной зарплатой: " +  minSum);
+        System.out.println("Сотрудник " + name + " с минимальной зарплатой: " +  minSum);
             return minSum;
         }
 
     private static double maxSalary (){
         double maxSum = 0;
+        String name = null;
             for (int i = 0; i < emp1.length; i++) {
                 if (maxSum < emp1[i].getSalary()){
                     maxSum = emp1[i].getSalary();
+                    name = emp1[i].getFio();
                 }
             }
-            System.out.println("Сотрудник с максимальной зарплатой: " +  maxSum);
+            System.out.println("Сотрудник " + name + " с максимальной зарплатой: " +  maxSum);
             return maxSum;
         }
     private static double avgSalary () {
