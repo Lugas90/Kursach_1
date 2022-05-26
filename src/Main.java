@@ -31,6 +31,22 @@ public class Main {
         indexSalary(20);
         System.out.println();
         printAllEmployee();
+        System.out.println();
+        departMinSalary(4);
+        System.out.println();
+        departMaxSalary(1);
+        System.out.println();
+        departAllMonthlyExpenses(3);
+        System.out.println();
+        departAvgSalary(1);
+        System.out.println();
+        departIndexSalary(2, 10);
+        System.out.println();
+        departPrintEmployee(4);
+        System.out.println();
+        findSalarySmaller(85_000);
+        System.out.println();
+        findSalaryMore(95_000);
         }
 
     private static void printAllEmployee () {
@@ -85,7 +101,6 @@ public class Main {
                 System.out.println("ФИО сотрудника: " + emp1[i].getFio());
             }
         }
-
     private static double indexSalary (int index){
         double indexSum = 0;
             for (int i = 0; i < emp1.length; i++) {
@@ -94,5 +109,96 @@ public class Main {
                 System.out.println("Зарплата сотрудника " + emp1[i].getFio() +  " проиндексирована на " + index + "%. Прибавка составляет: " + indexSum);
             }
             return indexSum;
+        }
+
+        private static double departMinSalary (int department){
+        double minSal = 1_000_000;
+        String name = null;
+            for (int i = 0; i < emp1.length; i++) {
+                if (minSal > emp1[i].getSalary() && department == emp1[i].getDepartment()) {
+                    minSal = emp1[i].getSalary();
+                    department = emp1[i].getDepartment();
+                    name = emp1[i].getFio();
+                }
+            }
+            System.out.println("Минимальная зарплата у сотрудника из отдела №" + department + " " + name + " составляет " + minSal);
+            return department;
+        }
+        private static double departMaxSalary (int department){
+        double maxSal = 0;
+        String name = null;
+            for (int i = 0; i < emp1.length; i++) {
+                if (maxSal < emp1[i].getSalary() && department == emp1[i].getDepartment()) {
+                    maxSal = emp1[i].getSalary();
+                    name = emp1[i].getFio();
+                    department = emp1[i].getDepartment();
+                }
+            }
+            System.out.println("Максимальная зарплата у сотрудника из отдела №" + department + " " + name + " составляет " + maxSal);
+            return department;
+        }
+        private static double departAllMonthlyExpenses (int department){
+        double sum = 0;
+            for (int i = 0; i < emp1.length; i++) {
+                if(department == emp1[i].getDepartment()){
+                    sum = sum + emp1[i].getSalary();
+                    department = emp1[i].getDepartment();
+                }
+            }
+            System.out.println("Затраты за месяц по отделу №" + department + " составляют: " + sum);
+            return department;
+        }
+        private static double departAvgSalary (int department){
+        double sum = 0;
+        int count = 0;
+            for (int i = 0; i < emp1.length; i++) {
+               if ( department == emp1[i].getDepartment()) {
+                    count++;
+                }
+            }
+            for (int i = 0; i < emp1.length; i++) {
+                if (department == emp1[i].getDepartment()){
+                    sum = sum + emp1[i].getSalary() / count;
+                    department = emp1[i].getDepartment();
+                }
+            }
+            System.out.println("Средняя зарплата по отделу №" + department + " составляет: " + sum);
+            return  department;
+        }
+        private static double departIndexSalary (int department, int index){
+        String name = null;
+        double sum = 0;
+            for (int i = 0; i < emp1.length; i++) {
+                if (department == emp1[i].getDepartment()){
+                    name = emp1[i].getFio();
+                    sum = emp1[i].getSalary() / 100 * index;
+                    department = emp1[i].getDepartment();
+                    emp1[i].setSalary(emp1[i].getSalary() + sum);
+                    System.out.println("Зарплата сотрудника из отдела №" + department + " " + name + " проиндексирована на " + index + "%. Прибавка составляет: " + sum);
+                }
+            }
+            return department;
+        }
+        private static void departPrintEmployee (int department){
+            for (int i = 0; i < emp1.length; i++) {
+                if (department == emp1[i].getDepartment()){
+                    department = emp1[i].getDepartment();
+                    System.out.println("Сотрудник c ID " + emp1[i].getId() + ", " + emp1[i].getFio() + ", зарплатой  " + emp1[i].getSalary());
+                }
+            }
+        }
+        private static void findSalarySmaller (double salary){
+            for (int i = 0; i < emp1.length; i++) {
+                if (emp1[i].getSalary() < salary){
+                    System.out.println("Сотрудник c ID " + emp1[i].getId() + ", " + emp1[i].getFio() + ", зарплатой  " + emp1[i].getSalary());
+                }
+            }
+        }
+        private static void findSalaryMore (double salary){
+            for (int i = 0; i < emp1.length; i++) {
+                if (emp1[i].getSalary() >= salary){
+                    System.out.println("Сотрудник c ID " + emp1[i].getId() + ", " + emp1[i].getFio() + ", зарплатой  " + emp1[i].getSalary());
+                }
+            }
         }
 }
